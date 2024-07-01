@@ -8,6 +8,14 @@ public enum Dish {
     WATER;
 //Метод, який відображає для користувача страви
     public static String allDishesToString(){
-        return "FISH, STEAK, SOUP, JUICE, WATER";
+        String result = "";
+        for (Dish dish : Dish.values()) {
+            if ("".equals(result)){
+                result+=dish.name();
+            } else {
+                result+=", "+dish.name();
+            }
+        }
+        return result;
     }
 }
