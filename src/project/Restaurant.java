@@ -3,6 +3,7 @@ package project;
 import project.kitchen.Cook;
 import project.kitchen.Dish;
 import project.kitchen.Order;
+import project.kitchen.Waiter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,7 +15,9 @@ public class Restaurant {
     public static void main(String[] args) throws IOException {
         Tablet tablet = new Tablet(5);
         Cook cook = new Cook("Slonenok");
+        Waiter waiter = new Waiter();
         tablet.addObserver(cook);
+        cook.addObserver(waiter);
         tablet.createOrder();
 
 
