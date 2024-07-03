@@ -4,4 +4,6 @@ package project.ad;
 // їхня послідовність для кожного замовлення.
 //Він також буде взаємодіяти з плеєром та відображатиме ролики.
 public class AdvertisementManager {
+
+    final AdvertisementStorage storage = AdvertisementStorage.getInstance();
 }

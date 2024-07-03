@@ -1,5 +1,7 @@
 package project;
 
+import project.ad.AdvertisementManager;
+import project.ad.AdvertisementStorage;
 import project.kitchen.Cook;
 import project.kitchen.Dish;
 import project.kitchen.Order;
@@ -19,8 +21,6 @@ public class Restaurant {
         tablet.addObserver(cook);
         cook.addObserver(waiter);
         tablet.createOrder();
-
-
 
     }
 }
