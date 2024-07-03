@@ -13,8 +13,22 @@ public class AdvertisementManager {
         this.timeSeconds = timeSeconds;
     }
 
-    //метод обробляє рекламне відео.
-    public void processVideos(){
-        System.out.println("calling processVideos method");
+    /*метод обробляє рекламне відео:
+       1 Підібрати список відео з доступних, перегляд яких забезпечує максимальну вигоду.
+       2 Якщо немає рекламних відео, які можна показати відвідувачеві,
+           то кинути NoVideoAvailableException,яке перехопити в
+           оптимальному місці та з рівнем Level.INFO логувати фразу
+           "No video is available for the order " + order
+       3 Відображати всі рекламні ролики, відібрані для показу,
+            у порядку зменшення вартості показу одного рекламного
+            ролика у копійках. Вторинне сортування -
+            збільшення вартості показу однієї секунди рекламного
+            ролика в тисячних частинах копійки. Використання методу Collections.sort
+     */
+    public void processVideos() throws NoVideoAvailableException {
+        if (storage.list().isEmpty()){
+            throw new NoVideoAvailableException();
+        }
+
     }
 }

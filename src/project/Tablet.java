@@ -1,6 +1,7 @@
 package project;
 
 import project.ad.AdvertisementManager;
+import project.ad.NoVideoAvailableException;
 import project.kitchen.Dish;
 import project.kitchen.Order;
 
@@ -32,6 +33,8 @@ public class Tablet extends Observable {
 
         } catch (IOException e) {
             logger.log(Level.SEVERE,"Console is unavailable.");
+        } catch (NoVideoAvailableException e){
+            logger.log(Level.INFO,"No video is available for the order " + order);
         }
         return order;
     }

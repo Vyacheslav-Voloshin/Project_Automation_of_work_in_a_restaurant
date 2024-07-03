@@ -30,4 +30,15 @@ public class Advertisement {
     public String getName() {
         return name;
     }
+
+
+    /* ћетод повинен кинути UnsupportedOperationException,
+      €кщо к≥льк≥сть показ≥в не Ї позитивним числом. «меншувати к≥льк≥сть показ≥в.
+
+     */
+    public void revalidate(){
+        if (hits==0) throw new UnsupportedOperationException();
+        hits--;
+
+    }
 }
