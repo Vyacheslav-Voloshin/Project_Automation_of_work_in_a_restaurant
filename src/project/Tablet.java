@@ -1,5 +1,6 @@
 package project;
 
+import project.ad.AdvertisementManager;
 import project.kitchen.Dish;
 import project.kitchen.Order;
 
@@ -24,8 +25,11 @@ public class Tablet extends Observable {
             order = new Order(this);
                 //ConsoleHelper.writeMessage(order.toString());
             if (order.isEmpty()) return null;
+                AdvertisementManager manager = new AdvertisementManager(order.getTotalCookingTime()*60);
+                manager.processVideos();
                 setChanged();
                 notifyObservers(order);
+
         } catch (IOException e) {
             logger.log(Level.SEVERE,"Console is unavailable.");
         }
