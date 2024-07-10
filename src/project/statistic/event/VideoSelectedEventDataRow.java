@@ -25,4 +25,8 @@ public class VideoSelectedEventDataRow  implements EventDataRow{
     }
 
 
+    @Override
+    public EventType getType() {
+        return EventType.SELECTED_VIDEOS;
+    }
 }

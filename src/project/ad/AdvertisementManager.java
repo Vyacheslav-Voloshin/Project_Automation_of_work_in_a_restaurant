@@ -1,5 +1,8 @@
 package project.ad;
 
+import project.statistic.StatisticManager;
+import project.statistic.event.VideoSelectedEventDataRow;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -33,7 +36,8 @@ public class AdvertisementManager {
     public void processVideos() {
         this.totalTimeSecondsLeft = Integer.MAX_VALUE;
         obtainOptimalVideoSet(new ArrayList<>(), timeSeconds, 0L);
-
+        VideoSelectedEventDataRow row = new VideoSelectedEventDataRow(optimalVideoSet,maxAmount, timeSeconds - totalTimeSecondsLeft);
+        StatisticManager.getInstance().register(row);
         displayAdvertisement();
     }
 

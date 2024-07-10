@@ -4,7 +4,7 @@ import project.kitchen.Dish;
 
 import java.util.Date;
 import java.util.List;
-/*даний клас буде у€вл€ти собою под≥ю з енема.
+/*даний клас буде у€вл€ти собою под≥ю з енума.
 ћи будемо реЇструвати даний  екземпл€р у сховищ≥.
  */
 public class CookedOrderEventDataRow implements EventDataRow {
@@ -23,5 +23,10 @@ public class CookedOrderEventDataRow implements EventDataRow {
         this.cookingTimeSeconds = cookingTimeSeconds;
         this.cookingDishes = cookingDishes;
         this.currentDate = new Date();
+    }
+
+    @Override
+    public EventType getType() {
+        return EventType.COOKED_ORDER;
     }
 }

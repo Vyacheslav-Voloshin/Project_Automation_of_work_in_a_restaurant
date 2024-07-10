@@ -27,7 +27,7 @@ public class ConsoleHelper {
     public static List<Dish> getAllDishesForOrder() throws IOException {
         List<Dish> dishList = new ArrayList<>();
         writeMessage(Dish.allDishesToString());
-        writeMessage("Ѕудь ласка введ≥ть назву блюда, €ку бажаЇте обрати:");
+        writeMessage("¬вед≥ть назву блюда:");
         writeMessage("ƒл€ виходу ≥з меню введ≥ть exit");
         while (true){
             String dishName = ConsoleHelper.readString().trim();

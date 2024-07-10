@@ -19,8 +19,7 @@ public class Restaurant {
         Cook cook = new Cook("Slonenok");
         Waiter waiter = new Waiter();
         tablet.addObserver(cook);
-        cook.addObserver(waiter);
         tablet.createOrder();
-
+        cook.addObserver(waiter);
     }
 }

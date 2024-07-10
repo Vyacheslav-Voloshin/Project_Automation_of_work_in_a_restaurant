@@ -4,4 +4,5 @@ package project.statistic.event;
 є переданий об'єкт подією чи ні.
  */
 public interface EventDataRow {
+     public EventType getType();
 }
