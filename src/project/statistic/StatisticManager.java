@@ -1,12 +1,10 @@
 package project.statistic;
 
+import project.kitchen.Cook;
 import project.statistic.event.EventDataRow;
 import project.statistic.event.EventType;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /*За допомогою цього класу ми будемо реєструвати події в сховищі
    Ми маємо одне сховище з однією точкою входу.
@@ -25,6 +23,8 @@ public class StatisticManager {
      */
     private StatisticStorage statisticStorage = new StatisticStorage();
 
+    private Set<Cook> cooks = new HashSet<>();
+
     private StatisticManager(){}
 
 
@@ -32,6 +32,11 @@ public class StatisticManager {
     //подію у сховищі.
    public void register(EventDataRow data){
         this.statisticStorage.put(data);
+   }
+
+   //метод void register(Cook cook), який реєструватиме повара в Set
+   public void register(Cook cook){
+        this.cooks.add(cook);
    }
 
     private class StatisticStorage {
@@ -49,5 +54,7 @@ public class StatisticManager {
                 throw new UnsupportedOperationException();
             this.storage.get(type).add(data);
         }
+
+
     }
    }

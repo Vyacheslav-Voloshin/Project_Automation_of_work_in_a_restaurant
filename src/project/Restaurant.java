@@ -17,9 +17,14 @@ public class Restaurant {
     public static void main(String[] args) throws IOException {
         Tablet tablet = new Tablet(5);
         Cook cook = new Cook("Slonenok");
+        DirectorTablet directorTablet = new DirectorTablet();
         Waiter waiter = new Waiter();
         tablet.addObserver(cook);
         tablet.createOrder();
         cook.addObserver(waiter);
+        directorTablet.printAdvertisementProfit();
+        directorTablet.printCookWorkloading();
+        directorTablet.printActiveVideoSet();
+        directorTablet.printArchivedVideoSet();
     }
 }

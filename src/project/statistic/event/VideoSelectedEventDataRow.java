@@ -24,9 +24,26 @@ public class VideoSelectedEventDataRow  implements EventDataRow{
         this.currentDate = new Date();
     }
 
+    public int getTotalDuration() {
+        return totalDuration;
+    }
+
+    public Date getCurrentDate() {
+        return currentDate;
+    }
 
     @Override
     public EventType getType() {
         return EventType.SELECTED_VIDEOS;
+    }
+
+    @Override
+    public Date getDate() {
+        return getCurrentDate();
+    }
+
+    @Override
+    public int getTime() {
+        return getTotalDuration();
     }
 }
