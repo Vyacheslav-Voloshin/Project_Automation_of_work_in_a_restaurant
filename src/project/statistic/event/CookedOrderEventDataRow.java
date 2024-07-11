@@ -33,6 +33,10 @@ public class CookedOrderEventDataRow implements EventDataRow {
         return cookingTimeSeconds;
     }
 
+    public String getCookName() {
+        return cookName;
+    }
+
     @Override
     public EventType getType() {
         return EventType.COOKED_ORDER;
