@@ -1,5 +1,7 @@
 package project;
 
+import project.ad.Advertisement;
+import project.ad.StatisticAdvertisementManager;
 import project.statistic.StatisticManager;
 import project.statistic.event.EventDataRow;
 
@@ -45,10 +47,35 @@ public class DirectorTablet {
     }
 
     //список активних роликів і кількість показів, що залишилася, по кожному;
-    public void printActiveVideoSet(){}
+    public void printActiveVideoSet(){
+        StatisticAdvertisementManager statisticAdvertisementManager = StatisticAdvertisementManager.getInstance();
+        List<Advertisement> list = statisticAdvertisementManager.getAdvertisementList(true);
+        Collections.sort(list, new Comparator<Advertisement>() {
+            @Override
+            public int compare(Advertisement o1, Advertisement o2) {
+                return o1.getName().toLowerCase().compareTo(o2.getName().toLowerCase());
+            }
+        });
+        for (Advertisement ad:list) {
+            System.out.println(ad.getName() + " - "+ad.getHits());
+        }
+
+    }
 
     //список неактивних роликів
-    public void printArchivedVideoSet(){}
+    public void printArchivedVideoSet(){
+        StatisticAdvertisementManager statisticAdvertisementManager = StatisticAdvertisementManager.getInstance();
+        List<Advertisement> list = statisticAdvertisementManager.getAdvertisementList(false);
+        Collections.sort(list, new Comparator<Advertisement>() {
+            @Override
+            public int compare(Advertisement o1, Advertisement o2) {
+                return o1.getName().toLowerCase().compareTo(o2.getName().toLowerCase());
+            }
+        });
+        for (Advertisement ad:list) {
+            System.out.println(ad.getName());
+        }
+    }
 
 
 

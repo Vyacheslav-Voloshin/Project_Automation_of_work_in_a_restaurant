@@ -31,11 +31,14 @@ public class Advertisement {
         return name;
     }
 
+    public int getHits() {
+        return hits;
+    }
 
     /* ћетод повинен кинути UnsupportedOperationException,
-      €кщо к≥льк≥сть показ≥в не Ї позитивним числом. «меншувати к≥льк≥сть показ≥в.
+          €кщо к≥льк≥сть показ≥в не Ї позитивним числом. «меншувати к≥льк≥сть показ≥в.
 
-     */
+         */
     public void revalidate(){
         if (hits==0)  throw new NoVideoAvailableException();
         hits--;
