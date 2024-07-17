@@ -4,6 +4,7 @@ import project.ad.AdvertisementManager;
 import project.ad.NoVideoAvailableException;
 import project.kitchen.Dish;
 import project.kitchen.Order;
+import project.kitchen.TestOrder;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,23 +21,42 @@ public class Tablet extends Observable {
         this.number = number;
     }
 // Метод створюватиме замовлення з тих страв, які вибере користувач
-    public Order createOrder(){
+    public void createOrder(){
         Order order = null;
         try {
             order = new Order(this);
-                //ConsoleHelper.writeMessage(order.toString());
-            if (order.isEmpty()) return null;
-                AdvertisementManager manager = new AdvertisementManager(order.getTotalCookingTime()*60);
-                manager.processVideos();
-                setChanged();
-                notifyObservers(order);
+            processOrder(order);
 
         } catch (IOException e) {
             logger.log(Level.SEVERE,"Console is unavailable.");
         } catch (NoVideoAvailableException e){
             logger.log(Level.INFO,"No video is available for the order " + order);
         }
-        return order;
+    }
+
+    private boolean processOrder(Order order) {
+        ConsoleHelper.writeMessage(order.toString());
+        if (order.isEmpty()) return true;
+        AdvertisementManager manager = new AdvertisementManager(order.getTotalCookingTime()*60);
+        manager.processVideos();
+        setChanged();
+        notifyObservers(order);
+        return false;
+    }
+
+
+    // Метод створюватиме замовлення з тих страв, які для тесту створить комп
+    public void createTestOrder(){
+        Order order = null;
+        try {
+            order = new TestOrder(this);
+            processOrder(order);
+
+        } catch (IOException e) {
+            logger.log(Level.SEVERE,"Console is unavailable.");
+        } catch (NoVideoAvailableException e){
+            logger.log(Level.INFO,"No video is available for the order " + order);
+        }
     }
 
     @Override

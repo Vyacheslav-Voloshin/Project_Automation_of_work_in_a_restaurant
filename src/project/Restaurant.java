@@ -14,13 +14,16 @@ import java.util.Observable;
 
 public class Restaurant {
 
+    private static final int ORDER_CREATING_INTERVAL = 100;
+
     public static void main(String[] args) throws IOException {
         Tablet tablet = new Tablet(5);
         Cook cook = new Cook("Slonenok");
         DirectorTablet directorTablet = new DirectorTablet();
         Waiter waiter = new Waiter();
         tablet.addObserver(cook);
-        tablet.createOrder();
+        //tablet.createOrder();
+        ///tablet.createTestOrder();
         cook.addObserver(waiter);
         directorTablet.printAdvertisementProfit();
         directorTablet.printCookWorkloading();

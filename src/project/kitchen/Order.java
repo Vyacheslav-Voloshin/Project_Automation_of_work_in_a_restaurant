@@ -25,7 +25,7 @@ public class Order {
 
     public Order(Tablet tablet) throws IOException {
         this.tablet = tablet;
-        this.dishes = ConsoleHelper.getAllDishesForOrder();
+        initDishes();
         ConsoleHelper.writeMessage(toString());
     }
 
@@ -53,5 +53,9 @@ public class Order {
 //метод, який визначатиме, чи є якісь страви на замовлення.
     public boolean isEmpty(){
          return (dishes.isEmpty());
+    }
+
+    protected void initDishes() throws IOException {
+        this.dishes = ConsoleHelper.getAllDishesForOrder();
     }
 }
