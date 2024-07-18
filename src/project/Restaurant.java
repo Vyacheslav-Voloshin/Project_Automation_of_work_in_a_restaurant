@@ -1,30 +1,47 @@
 package project;
 
-import project.ad.AdvertisementManager;
-import project.ad.AdvertisementStorage;
 import project.kitchen.Cook;
-import project.kitchen.Dish;
-import project.kitchen.Order;
 import project.kitchen.Waiter;
+import project.statistic.StatisticManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 public class Restaurant {
 
     private static final int ORDER_CREATING_INTERVAL = 100;
 
     public static void main(String[] args) throws IOException {
-        Tablet tablet = new Tablet(5);
-        Cook cook = new Cook("Slonenok");
+        List<Tablet> tablets = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            tablets.add(new Tablet(i + 1));
+        }
+
+        Cook cook1 = new Cook("Amigo");
+        Cook cook2 = new Cook("Diego");
+
+        StatisticManager.getInstance().register(cook1);
+        StatisticManager.getInstance().register(cook2);
+
+        OrderManager orderManager = new OrderManager();
+        for (Tablet tablet :
+                tablets) {
+            tablet.addObserver(orderManager);
+        }
+
+        Thread thread = new Thread(new RandomOrderGeneratorTask(tablets, ORDER_CREATING_INTERVAL));
+        thread.start();
+
+        try {
+            Thread.sleep(1000);
+            thread.interrupt();
+            thread.join();
+            Thread.sleep(1000);
+        } catch (InterruptedException ignore) {
+        }
+
         DirectorTablet directorTablet = new DirectorTablet();
-        Waiter waiter = new Waiter();
-        tablet.addObserver(cook);
-        //tablet.createOrder();
-        ///tablet.createTestOrder();
-        cook.addObserver(waiter);
         directorTablet.printAdvertisementProfit();
         directorTablet.printCookWorkloading();
         directorTablet.printActiveVideoSet();

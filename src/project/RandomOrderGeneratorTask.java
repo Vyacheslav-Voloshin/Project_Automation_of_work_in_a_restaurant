@@ -4,11 +4,11 @@ import java.util.List;
 
 public class RandomOrderGeneratorTask implements Runnable{
 
-    private List<Tablet> tabletList;
+    private List<Tablet> tablets;
     private int interval;
 
     public RandomOrderGeneratorTask(List<Tablet> tabletList, int interval) {
-        this.tabletList = tabletList;
+        this.tablets = tabletList;
         this.interval = interval;
     }
 
@@ -16,8 +16,8 @@ public class RandomOrderGeneratorTask implements Runnable{
     public void run() {
             try {
                 while (true) {
-                    int k = (int) (Math.random() * tabletList.size());
-                    Tablet tablet = tabletList.get(k);
+                    int k = (int) (Math.random() * tablets.size());
+                    Tablet tablet = tablets.get(k);
                     tablet.createTestOrder();
                     Thread.sleep(interval);
                 }
