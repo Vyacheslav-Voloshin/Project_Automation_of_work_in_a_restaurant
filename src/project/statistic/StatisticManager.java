@@ -26,25 +26,14 @@ public class StatisticManager {
      */
     private StatisticStorage statisticStorage = new StatisticStorage();
 
-    private Set<Cook> cooks = new HashSet<>();
-
     private StatisticManager(){}
 
-    public Set<Cook> getCooks() {
-        return cooks;
-    }
 
     //метод void register(Event Data Row data), який реєструватиме
     //подію у сховищі.
    public void register(EventDataRow data){
         this.statisticStorage.put(data);
    }
-
-   //метод void register(Cook cook), який реєструватиме повара в Set
-   public void register(Cook cook){
-        this.cooks.add(cook);
-   }
-
 
    //метод рахує загальний прибутоквід реклами за кожний день
    public Map<String,Long> profitForEveryDay(){

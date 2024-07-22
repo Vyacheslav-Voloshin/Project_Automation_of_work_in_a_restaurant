@@ -10,17 +10,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Tablet extends Observable {
+public class Tablet  {
 
     private final int number; //це номер планшета, щоб можна було однозначно встановити, звідки надійшло замовлення.
+
+    private LinkedBlockingQueue<Order> queue;
     private static Logger logger = Logger.getLogger(Tablet.class.getName()); // поле для логірування виключень
     public Tablet(int number) {
         this.number = number;
     }
-// Метод створюватиме замовлення з тих страв, які вибере користувач
+
+    public void setQueue(LinkedBlockingQueue<Order> queue) {
+        this.queue = queue;
+    }
+
+    // Метод створюватиме замовлення з тих страв, які вибере користувач
     public void createOrder(){
         Order order = null;
         try {
@@ -37,10 +45,11 @@ public class Tablet extends Observable {
     private boolean processOrder(Order order) {
         ConsoleHelper.writeMessage(order.toString());
         if (order.isEmpty()) return true;
+        // setChanged();
+        //notifyObservers(order);
+        queue.offer(order);
         AdvertisementManager manager = new AdvertisementManager(order.getTotalCookingTime()*60);
         manager.processVideos();
-        setChanged();
-        notifyObservers(order);
         return false;
     }
 

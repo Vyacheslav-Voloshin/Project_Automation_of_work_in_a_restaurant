@@ -1,17 +1,22 @@
 package project.kitchen;
 
+import project.Restaurant;
 import project.statistic.StatisticManager;
 import project.statistic.event.CookedOrderEventDataRow;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
+import java.util.concurrent.LinkedBlockingQueue;
 
 //Клас повар, який буде готувати для нас
-public class Cook extends Observable {
+public class Cook extends Observable implements Runnable {
 
     private String name;
 
     public boolean busy;
+
+    private LinkedBlockingQueue<Order> queue;
 
     public Cook(String name) {
         this.name = name;
@@ -24,6 +29,14 @@ public class Cook extends Observable {
 
     public boolean isBusy() {
         return busy;
+    }
+
+    public void setQueue(LinkedBlockingQueue<Order> queue) {
+        this.queue = queue;
+    }
+
+    public LinkedBlockingQueue<Order> getQueue() {
+        return queue;
     }
 
     public void startCookingOrder(Order order){
@@ -40,4 +53,21 @@ public class Cook extends Observable {
         StatisticManager.getInstance().register(cookedOrderEventDataRow);
         busy = false;
     }
+
+    @Override
+    public void run() {
+            try {
+                while (true) {
+                    Thread.sleep(10);
+                    if (!queue.isEmpty()) {
+                            if (!this.busy) {
+                                this.startCookingOrder(queue.take());
+                            }
+                        }
+                    }
+                } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+    }
+
 }
