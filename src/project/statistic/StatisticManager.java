@@ -30,6 +30,9 @@ public class StatisticManager {
 
     private StatisticManager(){}
 
+    public Set<Cook> getCooks() {
+        return cooks;
+    }
 
     //метод void register(Event Data Row data), який реєструватиме
     //подію у сховищі.
